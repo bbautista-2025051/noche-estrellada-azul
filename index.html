@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Una carta web pintada a mano para alguien muy especial: azul, Spider-Man y Van Gogh."/>
+<title>La Noche Estrellada que te Susurra</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#127756;</text></svg>"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Poppins:wght@200;300;400;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/style.css"/>
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+<!-- ===== Fondo fijo: cielo pintado (canvas de estrellas transparente encima) ===== -->
+<div class="sky-bg" aria-hidden="true">
+  <div class="swirl swirl-1"></div>
+  <div class="swirl swirl-2"></div>
+  <div class="swirl swirl-3"></div>
+  <div class="moon"></div>
+  <svg class="skyline" viewBox="0 0 1440 300" preserveAspectRatio="xMidYMax slice">
+    <path d="M0,300 L0,246
+      M170,246 C168,238 164,234 156,232 C148,230 150,222 142,218 C136,214 138,206 130,202
+      C124,198 126,190 118,186 C112,182 114,172 108,166 C102,160 108,148 118,144
+      C124,141 122,132 132,128 C140,124 136,112 148,110 C156,108 152,120 158,126
+      C164,132 160,144 168,150 C176,156 170,170 180,178 C186,182 184,196 192,204
+      C198,210 194,224 202,232 C208,238 204,244 214,246
+      L420,246 L420,214 L434,200 L448,214 L448,246
+      L522,246 L522,224 L538,206 L554,224 L554,246
+      L622,246 L622,218 L638,203 L654,218 L654,246
+      L760,246 L760,186 L776,168 L792,186 L792,246
+      M760,186 L760,158 L776,140 L792,158 L792,186
+      M866,246 L866,216 L882,200 L898,216 L898,246
+      L972,246 L972,228 L988,210 L1004,228 L1004,246
+      L1100,246 L1100,220 L1120,204 L1140,220 L1140,246
+      L1240,246 L1240,232 L1258,214 L1276,232 L1276,246
+      L1440,246 L1440,300 Z"
+      fill="#081d3a"/>
+    <path d="M0,300 L0,252 L1440,252 L1440,300 Z" fill="#050f22"/>
+    <g fill="#f6d069" opacity="0.85">
+      <rect x="426" y="204" width="8" height="10"/>
+      <rect x="534" y="214" width="7" height="10"/>
+      <rect x="630" y="208" width="8" height="10"/>
+      <rect x="884" y="206" width="8" height="10"/>
+      <rect x="982" y="218" width="7" height="10"/>
+      <rect x="1112" y="210" width="8" height="10"/>
+      <rect x="1250" y="222" width="7" height="10"/>
+    </g>
+  </svg>
+</div>
+<canvas id="stars-canvas"></canvas>
+
+<!-- ===== HÉROE ===== -->
+<header class="hero" id="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">— una historia pintada a mano para ti —</p>
+    <h1 class="hero-title">
+      <span class="line1">La Noche Estrellada</span>
+      <span class="line2">que te <em>Susurra</em></span>
+    </h1>
+    <p class="hero-sub">
+      Tres cosas te definen:<br/>
+      el <b>azul</b> que te queda demasiado bien,<br/>
+      el <b>Spider-Man</b> que llevas dentro<br/>
+      y el <b>Van Gogh</b> que pintaría mil noches como esta.
+    </p>
+    <a class="cta" href="#memorias">Baja despacio <span class="arrow">&#8595;</span></a>
+  </div>
+  <div class="spidey-hero" id="spideyHero" aria-hidden="true">
+    <svg viewBox="0 0 64 64" width="72" height="72">
+      <circle cx="32" cy="30" r="7" fill="#0b1220"/>
+      <circle cx="17" cy="26" r="4.5" fill="#0b1220"/>
+      <circle cx="47" cy="26" r="4.5" fill="#0b1220"/>
+      <path d="M32,37 C32,41 32,45 32,49" stroke="#0b1220" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <g stroke="#0b1220" stroke-width="2.2" fill="none" stroke-linecap="round">
+        <path d="M29,29 C24,22 16,14 8,19"/>
+        <path d="M29,30 C22,26 12,28 6,36"/>
+        <path d="M29,33 C20,36 8,42 9,52"/>
+        <path d="M35,29 C40,22 48,14 56,19"/>
+        <path d="M35,30 C42,26 52,28 58,36"/>
+        <path d="M35,33 C44,36 56,42 55,52"/>
+      </g>
+      <circle cx="30" cy="29" r="1.4" fill="#d6362f"/>
+      <circle cx="34" cy="29" r="1.4" fill="#d6362f"/>
+      <path d="M30,40 L34,40 L32,45 Z" fill="#d6362f"/>
+    </svg>
+  </div>
+  <div class="scroll-pulse" aria-hidden="true"></div>
+</header>
+
+<main>
+  <!-- ===== ACTO I: TELARAÑA DE MOMENTOS ===== -->
+  <section class="memories" id="memorias">
+    <div class="section-head">
+      <p class="eyebrow">acto I</p>
+      <h2>La telaraña de <span>nuestros momentos</span></h2>
+      <p class="section-sub">
+        Como Parker, yo también tengo una red&hellip;<br/>
+        pero la mía está tejida con recuerdos que llevo conmigo.
+        <!-- ✏️ EDITA estos recuerdos con los tuyos reales -->
+      </p>
+    </div>
+
+    <div class="web-wrap">
+      <svg id="web" viewBox="0 0 1000 620" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <g class="web-lines" fill="none" stroke="#8fc3f5" stroke-width="1.6" stroke-linecap="round">
+          <path d="M500,310 L760,310"/>
+          <path d="M500,310 L725.2,180"/>
+          <path d="M500,310 L630,84.8"/>
+          <path d="M500,310 L500,50"/>
+          <path d="M500,310 L370,84.8"/>
+          <path d="M500,310 L274.8,180"/>
+          <path d="M500,310 L240,310"/>
+          <path d="M500,310 L274.8,440"/>
+          <path d="M500,310 L370,535.2"/>
+          <path d="M500,310 L500,570"/>
+          <path d="M500,310 L630,535.2"/>
+          <path d="M500,310 L725.2,440"/>
+        </g>
+        <g class="web-arcs" fill="none" stroke="#5aa3e8" stroke-width="1.3" stroke-linecap="round">
+          <path d="M670,310 A170,170 0 0 0 647.2,225"/>
+          <path d="M647.2,225 A170,170 0 0 0 585,162.8"/>
+          <path d="M585,162.8 A170,170 0 0 0 500,140"/>
+          <path d="M500,140 A170,170 0 0 0 415,162.8"/>
+          <path d="M415,162.8 A170,170 0 0 0 352.8,225"/>
+          <path d="M352.8,225 A170,170 0 0 0 330,310"/>
+          <path d="M330,310 A170,170 0 0 0 352.8,395"/>
+          <path d="M352.8,395 A170,170 0 0 0 415,457.2"/>
+          <path d="M415,457.2 A170,170 0 0 0 500,480"/>
+          <path d="M500,480 A170,170 0 0 0 585,457.2"/>
+          <path d="M585,457.2 A170,170 0 0 0 647.2,395"/>
+          <path d="M647.2,395 A170,170 0 0 0 670,310"/>
+          <path d="M760,310 A260,260 0 0 0 725.2,180"/>
+          <path d="M725.2,180 A260,260 0 0 0 630,84.8"/>
+          <path d="M630,84.8 A260,260 0 0 0 500,50"/>
+          <path d="M500,50 A260,260 0 0 0 370,84.8"/>
+          <path d="M370,84.8 A260,260 0 0 0 274.8,180"/>
+          <path d="M274.8,180 A260,260 0 0 0 240,310"/>
+          <path d="M240,310 A260,260 0 0 0 274.8,440"/>
+          <path d="M274.8,440 A260,260 0 0 0 370,535.2"/>
+          <path d="M370,535.2 A260,260 0 0 0 500,570"/>
+          <path d="M500,570 A260,260 0 0 0 630,535.2"/>
+          <path d="M630,535.2 A260,260 0 0 0 725.2,440"/>
+          <path d="M725.2,440 A260,260 0 0 0 760,310"/>
+        </g>
+        <g class="web-nodes" fill="#c3defb">
+          <circle cx="500" cy="310" r="5"/>
+          <circle cx="760" cy="310" r="3.2"/>
+          <circle cx="725.2" cy="180" r="3.2"/>
+          <circle cx="630" cy="84.8" r="3.2"/>
+          <circle cx="500" cy="50" r="3.2"/>
+          <circle cx="370" cy="84.8" r="3.2"/>
+          <circle cx="274.8" cy="180" r="3.2"/>
+          <circle cx="240" cy="310" r="3.2"/>
+          <circle cx="274.8" cy="440" r="3.2"/>
+          <circle cx="370" cy="535.2" r="3.2"/>
+          <circle cx="500" cy="570" r="3.2"/>
+          <circle cx="630" cy="535.2" r="3.2"/>
+          <circle cx="725.2" cy="440" r="3.2"/>
+        </g>
+      </svg>
+
+      <!-- ✏️ EDITA estas tarjetas: pon tus verdaderos recuerdos -->
+      <article class="memory m1">
+        <span class="dot"></span>
+        <p>&#127912; &laquo;La primera vez que te vi, la noche entera se pint&#243; de azul.&raquo;</p>
+      </article>
+      <article class="memory m2">
+        <span class="dot"></span>
+        <p>&#127770; &laquo;Eres el tema favorito de todos los cielos que he pintado.&raquo;</p>
+      </article>
+      <article class="memory m3">
+        <span class="dot"></span>
+        <p>&#128375; &laquo;Con un gran poder viene una gran responsabilidad&hellip; y es decirte esto.&raquo;</p>
+      </article>
+      <article class="memory m4">
+        <span class="dot"></span>
+        <p>&#128153; &laquo;&#191;Van Gogh? Se habr&#237;a quedado sin azul pint&#225;ndote.&raquo;</p>
+      </article>
+      <article class="memory m5">
+        <span class="dot"></span>
+        <p>&#11088; &laquo;Cada vez que r&#237;es, una estrella de la Noche Estrellada se enciende.&raquo;</p>
+      </article>
+    </div>
+
+    <p class="web-note">* cada hilo brilla cuando pasas por &#233;l *</p>
+  </section>
+
+  <!-- ===== ACTO II: LA CARTA ===== -->
+  <section class="letter" id="carta">
+    <div class="section-head">
+      <p class="eyebrow">acto II</p>
+      <h2>La carta que <span>nadie m&#225;s leer&#225;</span></h2>
+    </div>
+    <!-- ✏️ EDITA la carta con tus palabras -->
+    <article class="paper" id="paper">
+      <svg class="paper-web" viewBox="0 0 120 120" aria-hidden="true">
+        <g fill="none" stroke="#5aa3e8" stroke-width="1.4" opacity="0.65">
+          <path d="M120,20 L60,80 L100,120"/>
+          <path d="M120,20 Q80,30 60,80 Q70,105 100,120"/>
+          <path d="M60,80 Q50,60 30,55"/>
+          <path d="M60,80 Q50,95 30,100"/>
+          <path d="M30,55 Q20,70 30,100"/>
+        </g>
+        <circle cx="30" cy="55" r="3" fill="#d6362f" opacity="0.8"/>
+      </svg>
+      <p class="paper-hello">Querida <span id="herName" class="highlight">estrella de mi cielo</span>:</p>
+      <p class="paper-line">No soy gran pintor ni superh&#233;roe, pero esta p&#225;gina es mi mejor intento de ser ambas cosas a la vez.</p>
+      <p class="paper-line">Pint&#233; un cielo del color de tus mejores d&#237;as, tej&#237; una telara&#241;a con cada momento que pasamos juntos y guard&#233; esta carta entre las estrellas para que solo t&#250; la encontraras.</p>
+      <p class="paper-line">No s&#233; c&#243;mo hace Peter Parker para ser valiente. Pero contigo, esta es la &#250;nica misi&#243;n que me atrever&#237;a a aceptar sin dudar.</p>
+      <p class="paper-line">As&#237; que aqu&#237; estoy, oscilando entre el azul y la tinta, scribiendo lo que ya sabes&hellip; pero que necesitaba que vieras: <b>me gustas</b>.</p>
+      <p class="paper-sign">&mdash; El que susurra esta noche &#128375;</p>
+    </article>
+  </section>
+
+  <!-- ===== ACTO III: EL FINAL ===== -->
+  <section class="finale" id="finale">
+    <div class="section-head">
+      <p class="eyebrow">acto III</p>
+      <p class="sr-only">Me gustas</p>
+    </div>
+    <canvas id="word-canvas" aria-hidden="true"></canvas>
+    <p class="finale-note">&hellip;m&#225;s de lo que a Van Gogh le gustaba el azul.</p>
+    <p class="finale-end">PS: la obra termina aqu&#237;, pero sigo pint&#225;ndote el cielo cada d&#237;a. &#128153;</p>
+  </section>
+</main>
+
+<!-- araña puente (aparece al llegar a la carta) -->
+<div class="spidey-bridge" id="spideyBridge" aria-hidden="true">
+  <svg viewBox="0 0 64 64" width="56" height="56">
+    <circle cx="32" cy="30" r="7" fill="#0b1220"/>
+    <circle cx="17" cy="26" r="4.5" fill="#0b1220"/>
+    <circle cx="47" cy="26" r="4.5" fill="#0b1220"/>
+    <path d="M32,37 C32,41 32,45 32,49" stroke="#0b1220" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <g stroke="#0b1220" stroke-width="2.2" fill="none" stroke-linecap="round">
+      <path d="M29,29 C24,22 16,14 8,19"/>
+      <path d="M29,30 C22,26 12,28 6,36"/>
+      <path d="M29,33 C20,36 8,42 9,52"/>
+      <path d="M35,29 C40,22 48,14 56,19"/>
+      <path d="M35,30 C42,26 52,28 58,36"/>
+      <path d="M35,33 C44,36 56,42 55,52"/>
+    </g>
+    <circle cx="30" cy="29" r="1.4" fill="#d6362f"/>
+    <circle cx="34" cy="29" r="1.4" fill="#d6362f"/>
+  </svg>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
